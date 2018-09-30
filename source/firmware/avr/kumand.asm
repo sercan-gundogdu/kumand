@@ -164,8 +164,8 @@ UART_Transmit_Byte:
 							// Load byte stored in r16 to buffer and send byte
 							// Data will be sent and UDR0(USART I/O Data Register) will be cleared automatically after load into it
 							sts UDR0, r16
-							
-	UART_Transmit_Byte_Ret:	ret
+	UART_Transmit_Byte_Ret:	
+							ret
 
 UART_Transmit_Str:	
 							// The data being stored in buffer called UART_TRANSMIT_BUFFER will be sent
@@ -173,7 +173,8 @@ UART_Transmit_Str:
 							ldi XH, high(UART_TRANSMIT_BUFFER)
 							ldi XL, low(UART_TRANSMIT_BUFFER)
 
-	UART_Transmit_Str_Loop:	// Load data stored in buffer into r16 and transmit
+	UART_Transmit_Str_Loop:	
+							// Load data stored in buffer into r16 and transmit
 							// Termination character is included.
 							ld r16, X+
 							rcall UART_Transmit_Byte
@@ -181,8 +182,8 @@ UART_Transmit_Str:
 							// If data is not null-termination byte, continue transmitting
 							cpi r16, '\0'
 							brne UART_Transmit_Str_Loop
-
-	UART_Transmit_Str_Ret:	ret
+	UART_Transmit_Str_Ret:	
+							ret
 
 UART_Receive_Byte:
 							// This function receives a single byte over UART and store it in r16
@@ -194,16 +195,16 @@ UART_Receive_Byte:
 							// Receive data and store it in register r16 
 							// UDR0(USART I/O Data Register) will be cleared automatically after reading from it
 							lds r16, UDR0
-							
-	UART_Receive_Byte_Ret:	ret
+	UART_Receive_Byte_Ret:	
+							ret
 
 UART_Receive_Str:
 							// The received data will be stored in buffer called UART_RECEIVE_BUFFER allocated in SRAM.
 							// Load buffer address to register X
 							ldi XH, high(UART_RECEIVE_BUFFER)
 							ldi XL, low(UART_RECEIVE_BUFFER)
-							
-	UART_Receive_Str_Loop:	// Receive byte and store it in buffer and post-increment buffer address
+	UART_Receive_Str_Loop:						
+							// Receive byte and store it in buffer and post-increment buffer address
 							// Termination character is included.
 							rcall UART_Receive_Byte
 							st X+, r16
@@ -211,8 +212,8 @@ UART_Receive_Str:
 							// If data is not null-termination byte, continue receiving
 							cpi r16, '\0'
 							brne UART_Receive_Str_Loop
-							
-	UART_Receive_Str_Ret:	ret
+	UART_Receive_Str_Ret:	
+							ret
 
 EEPROM_Read:
 							// Load Stack Pointer to register Z
@@ -229,7 +230,8 @@ EEPROM_Read:
 							ldi YH, high(UART_TRANSMIT_BUFFER)
 							ldi YL, low(UART_TRANSMIT_BUFFER)
 
-	EEPROM_Read_Loop:		// Wait for EEPROM to be ready
+	EEPROM_Read_Loop:		
+							// Wait for EEPROM to be ready
 							sbic EECR, EEPE
 							rjmp EEPROM_Read_Loop
 
@@ -252,9 +254,9 @@ EEPROM_Read:
 							// If data is not null-termination byte, continue reading
 							cpi r16, '\0'
 							brne EEPROM_Read_Loop
-
+	EEPROM_Read_Return:
 							// Restore the Stack Pointer and return
-	EEPROM_Read_Return:		out SPH, ZH
+							out SPH, ZH
 							out SPL, ZL
 							ret
 
@@ -273,7 +275,8 @@ EEPROM_Write:
 							ldi YH, high(UART_RECEIVE_BUFFER)
 							ldi YL, low(UART_RECEIVE_BUFFER)
 
-	EEPROM_Write_Loop:		// Wait for EEPROM to be ready
+	EEPROM_Write_Loop:		
+							// Wait for EEPROM to be ready
 							sbic EECR, EEPE
 							rjmp EEPROM_Write_Loop
 
@@ -298,9 +301,9 @@ EEPROM_Write:
 							// If data is not null-termination byte, continue writing
 							cpi r16, '\0'
 							brne EEPROM_Write_Loop
-
+	EEPROM_Write_Ret:		
 							// Restore Stack Pointer and return
-	EEPROM_Write_Ret:		out SPH, ZH
+							out SPH, ZH
 							out SPL, ZL
 							ret
 
@@ -359,8 +362,8 @@ PC_CONN:
 
 							// Send destination IP
 							rcall IP_SYNC
-
-	PC_CONN_Ret:			rcall DELAY_300ms
+	PC_CONN_Ret:			
+							rcall DELAY_300ms
 							rjmp MAIN
 
 IP_SYNC:
