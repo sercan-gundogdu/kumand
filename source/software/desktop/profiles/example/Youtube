@@ -1,0 +1,25 @@
+0f25cc00 l			//Forward
+2725cc00 k			//Play-Pause
+2b25cc00 j 			//Rewind
+2d25cc00 shift+n 	//Next
+2e25cc00 m 			//Mute
+2f05cc00			//2
+2f21cc00			//3
+2f24cc00			//4
+2f25c400			//1
+2f254c00 shift+p 	//Previous
+2f258c00 up 		//Vol+
+2f25c800 down		//Vol-
+
+0f25cc08 			//Forward
+2725cc08 			//Play-Pause
+2b25cc08  			//Rewind
+2d25cc08  			//Next
+2e25cc08  			//Mute
+2f05cc08			//2
+2f21cc08			//3
+2f24cc08			//4
+2f25c408			//1
+2f254c08  			//Previous
+2f258c08  			//Vol+
+2f25c808 			//Vol-
