@@ -53,7 +53,6 @@ UART_RECEIVE_BUFFER:  .byte 32
 .equ RUN_WPSPBC = 0x0A
 .equ GET_DESTINATION_IP = 0x0B
 
-
 //-----------------------------------------------------------------------------
 .macro eepromWrite
   // Load the address of the string to be sent, to r16:r17
@@ -178,6 +177,7 @@ UART_Transmit_Byte:
   // Data will be sent and UDR0(USART I/O Data Register) will be cleared -
   // automatically after load into it
   sts UDR0, r16
+
 UART_Transmit_Byte_Ret: 
   ret
 
@@ -214,6 +214,7 @@ UART_Receive_Byte:
   // UDR0(USART I/O Data Register) will be cleared automatically after -
   // reading from it
   lds r16, UDR0
+  
 UART_Receive_Byte_Ret:  
   ret
 
